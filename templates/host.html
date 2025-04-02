@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block title %}Host Game - Kahoot Clone{% endblock %}
+
+{% block content %}
+<div id="host-controls">
+    <h2>Host Panel</h2>
+
+    <!-- Initial State: Create Game -->
+    <div id="create-game-section">
+        <button id="create-game-btn" class="btn btn-primary btn-lg">Create New Game</button>
+    </div>
+
+    <!-- Lobby State: Waiting for Players -->
+    <div id="lobby-section" style="display: none;">
+        <h3>Game PIN: <span id="game-pin" class="badge bg-secondary fs-4">...</span></h3>
+        <h4>Waiting for players...</h4>
+        <ul id="player-list" class="list-group player-list mt-3 mb-3">
+            <!-- Player names will be added here -->
+        </ul>
+        <button id="start-game-btn" class="btn btn-success btn-lg" disabled>Start Game</button>
+    </div>
+
+    <!-- Game Running State: Show Question/Controls -->
+    <div id="game-running-section" style="display: none;">
+        <h3 id="question-number">Question .../...</h3>
+        <h4 id="question-text" class="mt-3 mb-4">Question text will appear here...</h4>
+        <!-- Add options display if needed for host -->
+         <div id="host-options" class="options-grid">
+            <!-- Options shown to host (optional) -->
+        </div>
+        <div id="answer-stats" class="mt-3">
+            <!-- Could show number of answers received -->
+        </div>
+        <button id="next-question-btn" class="btn btn-info btn-lg mt-4">Next Question</button>
+    </div>
+
+    <!-- Game Finished State -->
+    <div id="game-finished-section" style="display: none;">
+        <h2>Game Over!</h2>
+        <h4>Final Leaderboard:</h4>
+        <ol id="final-leaderboard" class="list-group list-group-numbered mt-3">
+            <!-- Final scores will be listed here -->
+        </ol>
+         <a href="{{ url_for('host_page') }}" class="btn btn-primary mt-4">Host Another Game</a>
+    </div>
+
+    <div id="status-message" class="alert alert-info status-message" style="display: none;"></div>
+    <div id="error-message" class="alert alert-danger status-message" style="display: none;"></div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/host.js') }}"></script>
+{% endblock %}

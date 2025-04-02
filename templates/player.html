@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% block title %}Join Game - Kahoot Clone{% endblock %}
+
+{% block content %}
+<div id="player-view">
+
+    <!-- Join Game Section -->
+    <div id="join-section">
+        <h2>Join Game</h2>
+        <form id="join-form">
+            <div class="mb-3">
+                <label for="game-pin-input" class="form-label">Game PIN</label>
+                <input type="text" class="form-control form-control-lg" id="game-pin-input" name="pin" required maxlength="5" value="{{ prefill_pin }}">
+            </div>
+            <div class="mb-3">
+                <label for="nickname-input" class="form-label">Nickname</label>
+                <input type="text" class="form-control form-control-lg" id="nickname-input" name="nickname" required maxlength="20">
+            </div>
+            <button type="submit" class="btn btn-success btn-lg">Join</button>
+        </form>
+        <div id="join-error" class="alert alert-danger mt-3" style="display: none;"></div>
+    </div>
+
+    <!-- Waiting Room Section -->
+    <div id="waiting-section" style="display: none;">
+        <h2>Welcome, <span id="player-nickname"></span>!</h2>
+        <p class="lead">Waiting for the host to start the game...</p>
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Question Display Section -->
+    <div id="question-section" style="display: none;">
+        <h3 id="player-question-number">Question .../...</h3>
+        <h4 id="player-question-text" class="mt-3 mb-4">...</h4>
+        <div id="player-options" class="options-grid">
+            <!-- Option buttons will be added here -->
+        </div>
+        <div id="answer-feedback" class="answer-feedback" style="display: none;"></div>
+        <div id="player-score" class="mt-3 fs-5">Score: <span id="score-value">0</span></div>
+    </div>
+
+    <!-- Game Over Section -->
+    <div id="player-game-over-section" style="display: none;">
+        <h2>Game Over!</h2>
+        <h4>Final Results:</h4>
+        <p class="lead">Your final score: <strong id="final-score">0</strong></p>
+        <p>(Check the host screen for the full leaderboard)</p>
+         <a href="{{ url_for('player_page') }}" class="btn btn-success mt-4">Join Another Game</a>
+    </div>
+
+     <!-- General Status/Error -->
+    <div id="player-status" class="alert alert-info status-message" style="display: none;"></div>
+    <div id="player-error" class="alert alert-danger status-message" style="display: none;"></div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/player.js') }}"></script>
+{% endblock %}
